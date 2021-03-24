@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.options import Options
 import time
-from joblib import Parallel, delayed
+
 
 def google(input_keyword):
     PATH = "chromedriver_win32/chromedriver.exe" #  path to chrome driver
