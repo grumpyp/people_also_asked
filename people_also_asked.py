@@ -18,8 +18,11 @@ def google(input_keyword):
     # CRAWL GOOGLE -------------------------------------------------------------------------------------------------------------------------
     # navigate to Google website and accept cookies
     driver.get("https://google.com/")
-    WebDriverWait(driver,10).until(EC.frame_to_be_available_and_switch_to_it((By.CSS_SELECTOR,"iframe[src^='https://consent.google.com']")))
-    WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.XPATH,"//div[@id='introAgreeButton']"))).click()
+    #WebDriverWait(driver,10).until(EC.frame_to_be_available_and_switch_to_it((By.CSS_SELECTOR,"iframe[src^='https://consent.google.com']")))
+    try: 
+        WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.XPATH,"//div[@id='introAgreeButton']"))).click()
+    except:
+        WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.XPATH,"//*[@id='zV9nZe']"))).click()
     
     # set input and start google search
     eingabe_google = input_keyword
@@ -30,16 +33,19 @@ def google(input_keyword):
     except Exception as e:
         pass
     google_results = []
-    openup = driver.find_element_by_class_name("ifM9O")
-    all_children_by_css = openup.find_elements_by_css_selector("[class='hide-focus-ring cbphWd']")
-    for i in all_children_by_css:
-        i.click()
-        time.sleep(3)
-        i.click()        
-    all_children_by_css = openup.find_elements_by_css_selector("[class='ygGdYd related-question-pair']")
-    for question in all_children_by_css:
-        google_results.append(question.text)
-    driver.close()
+    try:
+        time.sleep(2)
+        openup = driver.find_element_by_class_name("ifM9O")
+        all_children_by_css = openup.find_elements_by_css_selector("[class='cbphWd']")
+        for i in all_children_by_css:
+            i.click()
+            time.sleep(2.5)
+            i.click()        
+        all_children_by_css = openup.find_elements_by_css_selector("[class='ygGdYd related-question-pair']")
+        for question in all_children_by_css:
+            google_results.append(question.text)
+    except:
+        driver.close()
     return google_results
 
 def bing(input_keyword):
