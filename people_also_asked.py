@@ -22,7 +22,7 @@ def google(input_keyword):
     try: 
         WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.XPATH,"//div[@id='introAgreeButton']"))).click()
     except:
-        WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.XPATH,"//*[@id='zV9nZe']"))).click()
+        WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.XPATH,"//*[@id='L2AGLb']/div"))).click()
     
     # set input and start google search
     eingabe_google = input_keyword
